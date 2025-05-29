@@ -1,0 +1,11 @@
+.black-select {
+    color: #000000a6 !important;
+}
+
+input, textarea, button span, button {
+    cursor: pointer;
+}
+.sidebarIconTrigger svg {
+    height: 100%;
+    width: 100%;
+}

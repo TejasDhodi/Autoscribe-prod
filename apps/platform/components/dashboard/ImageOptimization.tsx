@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, ChangeEvent } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -8,7 +8,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Image as ImageIcon, Upload, Settings, Download } from 'lucide-react';
 
 const ImageOptimization = () => {
-  const optimizedImages = [
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [optimizedImages, setOptimizedImages] = useState([
     {
       id: 1,
       name: "blog-header-ai-tools.jpg",
@@ -36,13 +37,36 @@ const ImageOptimization = () => {
       dimensions: "1400x700",
       status: "optimized"
     }
-  ];
+  ]);
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setImagePreview(event.target?.result as string);
+      };
+      reader.readAsDataURL(file);
+
+      setOptimizedImages([...optimizedImages, {
+        id: optimizedImages.length + 1,
+        name: file.name,
+        originalSize: `${(file.size / 1024 / 1024).toFixed(2)} MB`,
+        optimizedSize: "Placeholder Size",
+        savings: "XX%",
+        dimensions: "Placeholder Dimensions",
+        status: "optimizing"
+      }]);
+    }
+  };
 
   return (
     <div className="space-y-6">
       <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+          <CardTitle className="flex items-center gap-2 text-black">
             <Upload className="w-5 h-5 text-blue-600" />
             Upload & Optimize Images
           </CardTitle>
@@ -54,10 +78,21 @@ const ImageOptimization = () => {
             <p className="text-sm text-gray-600 mb-4">
               Drag and drop your images here or click to browse
             </p>
-            <Button>
-              <Upload className="w-4 h-4 mr-2" />
+            <Input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleImageUpload}
+              className="hidden"
+            />
+            <Button variant="outline" size="sm" onClick={() => fileInputRef.current?.click()}>
               Choose Files
             </Button>
+
+            {imagePreview && (
+              <div className="mt-6">
+                <img src={imagePreview} alt="Preview" className="max-w-full h-auto rounded-lg shadow-md" />
+              </div>
+            )}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -66,11 +101,11 @@ const ImageOptimization = () => {
                 <Settings className="w-4 h-4" />
                 Optimization Settings
               </h3>
-              
+
               <div>
-                <Label htmlFor="quality">Quality</Label>
+                <Label htmlFor="quality" className='text-black'>Quality</Label>
                 <Select>
-                  <SelectTrigger className="mt-1">
+                  <SelectTrigger className="mt-1 black-select">
                     <SelectValue placeholder="Select quality" />
                   </SelectTrigger>
                   <SelectContent>
@@ -82,9 +117,9 @@ const ImageOptimization = () => {
               </div>
 
               <div>
-                <Label htmlFor="format">Output Format</Label>
+                <Label htmlFor="format" className='text-black'>Output Format</Label>
                 <Select>
-                  <SelectTrigger className="mt-1">
+                  <SelectTrigger className="mt-1 black-select">
                     <SelectValue placeholder="Select format" />
                   </SelectTrigger>
                   <SelectContent>
@@ -97,24 +132,24 @@ const ImageOptimization = () => {
               </div>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-4 text-black">
               <h3 className="font-semibold text-gray-900">Resize Options</h3>
-              
+
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="width">Width (px)</Label>
-                  <Input id="width" placeholder="1200" className="mt-1" />
+                  <Input id="width" placeholder="1200" className="mt-1 placeholder:text-black-90" />
                 </div>
                 <div>
                   <Label htmlFor="height">Height (px)</Label>
-                  <Input id="height" placeholder="600" className="mt-1" />
+                  <Input id="height" placeholder="600" className="mt-1 placeholder:text-black-90" />
                 </div>
               </div>
 
               <div>
                 <Label htmlFor="watermark">Watermark</Label>
                 <Select>
-                  <SelectTrigger className="mt-1">
+                  <SelectTrigger className="mt-1 black-select">
                     <SelectValue placeholder="Add watermark" />
                   </SelectTrigger>
                   <SelectContent>
@@ -131,7 +166,7 @@ const ImageOptimization = () => {
 
       <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+          <CardTitle className="flex items-center gap-2 text-black">
             <ImageIcon className="w-5 h-5 text-green-600" />
             Optimized Images History
           </CardTitle>
@@ -153,7 +188,7 @@ const ImageOptimization = () => {
                     </div>
                   </div>
                   <div className="flex gap-2">
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" className='text-black'>
                       <Download className="w-4 h-4 mr-1" />
                       Download
                     </Button>

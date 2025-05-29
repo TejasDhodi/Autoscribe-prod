@@ -18,7 +18,7 @@ import RecentActivity from '@/components/dashboard/RecentActivity';
 import SettingsPanel from '@/components/dashboard/SettingsPanel';
 
 const Home = () => {
-  const [activeTab, setActiveTab] = useState("dashboard");
+  const [activeTab, setActiveTab] = useState<string>("dashboard");
   const [searchQuery, setSearchQuery] = useState("");
 
   const renderContent = () => {
@@ -80,7 +80,7 @@ const Home = () => {
                     className="pl-10 w-full lg:w-64 bg-gray-800 border-gray-700 text-white placeholder-gray-400 focus:border-blue-500"
                   />
                 </div>
-                <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl shrink-0">
+                <Button className="cursor-pointer bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl shrink-0" onClick={() => setActiveTab("create")}>
                   <Plus className="w-4 h-4 mr-2" />
                   <span className="hidden sm:inline">Generate New Blog</span>
                   <span className="sm:hidden">New</span>

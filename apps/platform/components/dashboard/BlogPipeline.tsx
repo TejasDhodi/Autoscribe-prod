@@ -54,7 +54,7 @@ const BlogPipeline = () => {
   return (
     <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
+        <CardTitle className="flex items-center gap-2 text-black">
           <Send className="w-5 h-5 text-blue-600" />
           Content Pipeline
         </CardTitle>
@@ -86,7 +86,7 @@ const BlogPipeline = () => {
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <Button variant="outline" size="sm">
+                  <Button variant="outline" size="sm" className='text-black'>
                     <Edit className="w-4 h-4 mr-1" />
                     Edit
                   </Button>
@@ -97,12 +97,12 @@ const BlogPipeline = () => {
                     </Button>
                   ) : null}
                   {blog.status === 'ready' && (
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" className='text-black' >
                       <Calendar className="w-4 h-4 mr-1" />
                       Schedule
                     </Button>
                   )}
-                  <Button variant="ghost" size="sm">
+                  <Button variant="ghost" size="sm" className='text-black'>
                     <Eye className="w-4 h-4 mr-1" />
                     Preview
                   </Button>

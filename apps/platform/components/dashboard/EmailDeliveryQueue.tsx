@@ -69,7 +69,7 @@ const EmailDeliveryQueue = () => {
       <TabsContent value="scheduled">
         <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-black">
               <Clock className="w-5 h-5 text-orange-600" />
               Scheduled Email Deliveries
             </CardTitle>
@@ -96,11 +96,11 @@ const EmailDeliveryQueue = () => {
                       </div>
                     </div>
                     <div className="flex gap-2">
-                      <Button variant="outline" size="sm">
+                      <Button variant="outline" size="sm" className='text-black'>
                         <Eye className="w-4 h-4 mr-1" />
                         Preview
                       </Button>
-                      <Button variant="outline" size="sm">
+                      <Button variant="outline" size="sm" className='text-black'>
                         Edit Time
                       </Button>
                       <Button size="sm">

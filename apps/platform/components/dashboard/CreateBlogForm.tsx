@@ -41,28 +41,28 @@ Content creators are finding that AI doesn't replace creativity—it amplifies i
     <div className="space-y-6">
       <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+          <CardTitle className="flex items-center gap-2 text-black">
             <Sparkles className="w-5 h-5 text-purple-600" />
             Generate New Blog Content
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="space-y-4">
+            <div className="space-y-4 text-black">
               <div>
                 <Label htmlFor="topic">Topic / Keywords</Label>
                 <Input 
                   id="topic"
                   placeholder="e.g., AI in marketing, productivity tips, design trends"
-                  className="mt-1"
+                  className="mt-1 placeholder:text-black-90"
                 />
               </div>
               
               <div>
                 <Label htmlFor="tone">Tone</Label>
                 <Select>
-                  <SelectTrigger className="mt-1">
-                    <SelectValue placeholder="Select writing tone" />
+                  <SelectTrigger className="mt-1 black-select">
+                    <SelectValue placeholder="Select writing tone"/>
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="professional">Professional</SelectItem>
@@ -77,7 +77,7 @@ Content creators are finding that AI doesn't replace creativity—it amplifies i
               <div>
                 <Label htmlFor="length">Content Length</Label>
                 <Select>
-                  <SelectTrigger className="mt-1">
+                  <SelectTrigger className="mt-1 black-select">
                     <SelectValue placeholder="Select length" />
                   </SelectTrigger>
                   <SelectContent>
@@ -107,13 +107,13 @@ Content creators are finding that AI doesn't replace creativity—it amplifies i
               </Button>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-4 text-black">
               <div>
                 <Label htmlFor="additional">Additional Instructions</Label>
                 <Textarea 
                   id="additional"
                   placeholder="Any specific requirements, style preferences, or key points to include..."
-                  className="mt-1 min-h-[120px]"
+                  className="mt-1 min-h-[120px] placeholder:text-black-90"
                 />
               </div>
 
