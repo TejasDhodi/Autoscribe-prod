@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext"
-import { $getSelection, $isRangeSelection, COMMAND_PRIORITY_LOW, TextNode } from "lexical"
+import { $getSelection, $isRangeSelection, COMMAND_PRIORITY_LOW, TextNode, KEY_DOWN_COMMAND } from "lexical"
 import { mergeRegister } from "@lexical/utils"
 import { $createParagraphNode } from "lexical"
 import { $getRoot } from "lexical"
@@ -138,7 +138,7 @@ export function SlashCommandPlugin({ anchorElem, onRewrite, onImageGeneration }:
       }),
 
       editor.registerCommand(
-        "keydown",
+        KEY_DOWN_COMMAND,
         (e: KeyboardEvent) => {
           if (e.key === "Escape" && slashMenuOpen) {
             setSlashMenuOpen(false)
