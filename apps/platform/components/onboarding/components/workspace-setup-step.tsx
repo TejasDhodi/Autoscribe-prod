@@ -66,8 +66,7 @@ export function WorkspaceSetupStep({
         return value ? "" : "Please select an industry.";
       case "logo":
         if (!value) return "Logo is required.";
-        // const validTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
-        // if (!validTypes.includes(value.type)) return "Invalid file type.";
+        if (typeof value === "string") return "";
         if (value.size > 2 * 1024 * 1024) return "File size should be less than 2MB.";
         return "";
       default:
@@ -98,14 +97,18 @@ export function WorkspaceSetupStep({
 
     // setFormData((prev) => ({ ...prev, logo: file }));
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      setLogoPreview(event.target?.result as string);
-    };
-    reader.readAsDataURL(file);
-    const url = await uploadImage(file, 'user-logos');
-    console.log(url);
-    setFormData((prev) => ({ ...prev, logo: url }));
+    try {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setLogoPreview(event.target?.result as string);
+      };
+      reader.readAsDataURL(file);
+      const url = await uploadImage(file, 'user-logos');
+      console.log({url});
+      setFormData((prev) => ({ ...prev, logo: url }));
+    } catch (error) {
+      console.log("Error uploading logo from handleLogoUpload:", error);
+    }
   };
 
   const handleNext = () => {
