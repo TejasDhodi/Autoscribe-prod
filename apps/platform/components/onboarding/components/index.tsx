@@ -1,0 +1,7 @@
+export {InviteTeamStep} from '@/components/onboarding/components/invite-team-step'
+export {RoleSelectionStep} from '@/components/onboarding/components/role-selection-step'
+export {SuccessStep} from '@/components/onboarding/components/success-step'
+export {WelcomeStep} from '@/components/onboarding/components/welcome-step'
+export {OnboardingContainer} from '@/components/onboarding/components/onboarding-container'
+export {OnboardingLayout} from '@/components/onboarding/components/onboarding-layout'
+export {WorkspaceSetupStep} from '@/components/onboarding/components/workspace-setup-step'
