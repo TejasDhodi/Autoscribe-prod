@@ -60,7 +60,7 @@ export const OnboardingJourney = ({
               workspaceName: onboardingData.workspaceName,
               teamName: onboardingData.teamName,
               industry: onboardingData.industry,
-              logo: onboardingData.logo,
+              logo: onboardingData.logo ?? null,
             }}
           />
         ),
