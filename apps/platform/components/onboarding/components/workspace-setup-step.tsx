@@ -21,7 +21,7 @@ interface WorkspaceSetupStepProps {
     workspaceName: string;
     teamName: string;
     industry: string;
-    logo?: File | null;
+    logo: File | null;
   }) => void;
   onBack: () => void;
   workspaceData: {
@@ -66,8 +66,8 @@ export function WorkspaceSetupStep({
         return value ? "" : "Please select an industry.";
       case "logo":
         if (!value) return "Logo is required.";
-        const validTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
-        if (!validTypes.includes(value.type)) return "Invalid file type.";
+        // const validTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
+        // if (!validTypes.includes(value.type)) return "Invalid file type.";
         if (value.size > 2 * 1024 * 1024) return "File size should be less than 2MB.";
         return "";
       default:
@@ -96,7 +96,7 @@ export function WorkspaceSetupStep({
 
     if (error) return;
 
-    setFormData((prev) => ({ ...prev, logo: file }));
+    // setFormData((prev) => ({ ...prev, logo: file }));
 
     const reader = new FileReader();
     reader.onload = (event) => {
@@ -105,6 +105,7 @@ export function WorkspaceSetupStep({
     reader.readAsDataURL(file);
     const url = await uploadImage(file, 'user-logos');
     console.log(url);
+    setFormData((prev) => ({ ...prev, logo: url }));
   };
 
   const handleNext = () => {
