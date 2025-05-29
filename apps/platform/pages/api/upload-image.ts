@@ -35,9 +35,21 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           ...formData.getHeaders(),
           Authorization: `Bearer ${encodedToken}`,
         },
+        maxRedirects: 0, 
+        validateStatus: (status) => status < 400 || status === 307,
       });
 
-      return res.status(200).json({ url: uploadRes.data.url, headers: formData.getHeaders() });
+      // return res.status(200).json({ url: uploadRes.data.url, headers: formData.getHeaders() });
+      if (uploadRes.status === 307) {
+        const redirectUrl = uploadRes.headers.location;
+        const finalRes = await axios.post(redirectUrl, formData, {
+          headers: formData.getHeaders(),
+        });
+      
+        return res.status(200).json({ url: finalRes.data.url });
+      } else {
+        return res.status(200).json({ url: uploadRes.data.url });
+      }
     } catch (uploadErr: any) {
       console.error('PixelBin Upload Error:', uploadErr.response?.data || uploadErr.message);
       return res.status(500).json({ error: uploadErr.response?.data || uploadErr.message, msg: 'Upload failed' });
